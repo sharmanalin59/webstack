@@ -1,7 +1,10 @@
 package com.imanage.webstack.controller;
 
 import com.imanage.webstack.dao.StackDao;
+import com.imanage.webstack.entity.Stack;
 import com.imanage.webstack.exception.StackNotExistsException;
+import com.imanage.webstack.utils.ErrorMessage;
+import com.imanage.webstack.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -10,6 +13,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 /**
  * @author nalin.sharma on 17/09/21
@@ -32,20 +37,21 @@ public class UserStackController {
     @GetMapping("/")
     public ResponseEntity<Integer[]> getIntegerStack(Authentication authentication) {
         String userName = authentication.getName();
-        return new ResponseEntity<>(stackDao.getUserStack(userName).getAll(), HttpStatus.OK);
+        Stack<Integer> stack = stackDao.getUserStack(userName);
+        if(Objects.isNull(stack)) {
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(stack.getAll(), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> createStack(Authentication authentication) {
+    public ResponseEntity<String> createIntegerStack(Authentication authentication) {
         String userName = authentication.getName();
-        try {
-            stackDao.getUserStack(userName);
-        }
-        catch (StackNotExistsException ex) {
+        if(Objects.isNull(stackDao.getUserStack(userName))) {
             stackDao.createUserStack(userName);
-            return new ResponseEntity<String>("Stack created!!", HttpStatus.OK);
+            return new ResponseEntity<String>(Message.STACK_CREATED, HttpStatus.OK);
         }
-        return new ResponseEntity<String>("Stack already exists!!", HttpStatus.OK);
+        return new ResponseEntity<String>(Message.STACK_ALREADY_EXISTS, HttpStatus.OK);
     }
 
     @PostMapping("/push/{item}/")

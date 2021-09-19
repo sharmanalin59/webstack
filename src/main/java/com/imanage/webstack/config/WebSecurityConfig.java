@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-		.withUser("a").password("{noop}a").roles("USER").and()
+		.withUser("imanage").password("{noop}imanage").roles("USER").and()
 		.withUser("admin")
 				.password("{noop}admin").credentialsExpired(true)
 				.accountExpired(true).accountLocked(true)

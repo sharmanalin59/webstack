@@ -20,7 +20,11 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({ StackOverflowException.class, StackUnderflowException.class, NumberFormatException.class, StackNotExistsException.class, Exception.class })
+    @ExceptionHandler({ StackOverflowException.class,
+            StackUnderflowException.class,
+            NumberFormatException.class,
+            StackNotExistsException.class,
+            Exception.class })
     public final ResponseEntity<String> handleException(Exception ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
 
@@ -53,12 +57,12 @@ public class GlobalExceptionHandler {
     /** Customize the response for UserNotFoundException. */
     protected ResponseEntity<String> handleStackOverFlowException(StackOverflowException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> errors = Collections.singletonList(ex.getMessage());
-        return handleExceptionInternal(ex, ex.getMessage(), headers, status, request);
+        return handleExceptionInternal(ex, ErrorMessage.STACK_OVERFLOW, headers, status, request);
     }
 
     protected ResponseEntity<String> handleStackUnderFlowException(StackUnderflowException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> errors = Collections.singletonList(ex.getMessage());
-        return handleExceptionInternal(ex, ex.getMessage(), headers, status, request);
+        return handleExceptionInternal(ex, ErrorMessage.STACK_UNDERFLOW, headers, status, request);
     }
 
     /** A single place to customize the response body of all Exception types. */

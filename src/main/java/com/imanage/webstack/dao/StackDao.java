@@ -15,20 +15,25 @@ import java.util.Map;
  */
 @Repository
 public class StackDao {
-    Map<String, Stack<Integer>> userStackMap = new HashMap<>();
+    private Map<String, Stack<Integer>> userStackMap = new HashMap<>();
 
     @Value("${stack.size}")
     private Integer stackSize;
 
+    public Integer getStackSize() {
+        return stackSize;
+    }
+
+    public Map<String, Stack<Integer>> getUserStackMap() {
+        return userStackMap;
+    }
+
     public Stack<Integer> getUserStack(String user) {
-        if(!userStackMap.containsKey(user)) {
-            throw new StackNotExistsException(ErrorMessage.STACK_NOT_EXISTS);
-        }
         return userStackMap.get(user);
     }
 
     public Stack<Integer> createUserStack(String user) {
-        return userStackMap.put(user, new BoundedDoublyLinkedList<>(stackSize));
+        return userStackMap.put(user, new BoundedDoublyLinkedList<>(getStackSize()));
     }
 
     public void pushToUserStack(String user, Integer item) {
