@@ -9,7 +9,7 @@ import com.imanage.webstack.utils.ErrorMessage;
 public class BoundedDoublyLinkedList<T> implements BoundedStack<T>, BoundedQueue<T> {
 
     public BoundedDoublyLinkedList(int maxSize) {
-        if(maxSize < 1) {
+        if(maxSize < 0) {
             throw new NonPositiveSizeException(ErrorMessage.NON_POSITIVE_SIZE);
         }
         this.maxSize = maxSize;
@@ -28,13 +28,13 @@ public class BoundedDoublyLinkedList<T> implements BoundedStack<T>, BoundedQueue
     private final int maxSize;
 
     public void addAtEnd(T t) {
+        if(maxSize == size) {
+            throw new BoundedDoublyLinkedListOverflowException(ErrorMessage.BOUNDED_DOUBLY_LINKED_LIST_IS_FULL);
+        }
         if(start == null && end == null) {
             start = end = new Node<>(t);
         }
         else {
-            if(maxSize == size) {
-                throw new BoundedDoublyLinkedListOverflowException(ErrorMessage.BOUNDED_DOUBLY_LINKED_LIST_IS_FULL);
-            }
             end.next = new Node<>(t);
             end.next.pre = end;
             end = end.next;

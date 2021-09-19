@@ -6,7 +6,7 @@ The following topics are the guide to using this project:
 * Run test cases using 'mvn test'
 
 ### UI Interface
-* Under WebSecurityConfig.java configure the user for login and assign correct role
+* Under WebSecurityConfig.java configure the user for login and assign correct role, default user configured is username: 'imanage' and password: 'imanage'
 * Login to the application on http://127.0.0.1:8080
 
 ### Docker Image
