@@ -12,4 +12,4 @@ The following topics are the guide to using this project:
 ### Docker Image
 
 * Create docker image using 'docker build -t imanage/web-stack .'
-* Run docker image using docker run --publish 8080:8080  imanage/web-stack
+* Run docker image using 'docker run --publish 8080:8080  imanage/web-stack'
