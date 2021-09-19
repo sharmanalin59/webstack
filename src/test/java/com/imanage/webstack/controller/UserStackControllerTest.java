@@ -6,6 +6,7 @@ import com.imanage.webstack.exception.StackNotExistsException;
 import com.imanage.webstack.exception.StackOverflowException;
 import com.imanage.webstack.exception.StackUnderflowException;
 import com.imanage.webstack.utils.ErrorMessage;
+import com.imanage.webstack.utils.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -72,11 +73,11 @@ class UserStackControllerTest {
     @Test
     @WithMockUser("spring")
     void createStack_When_not_exists() throws Exception {
-        Mockito.when(stackDao.getUserStack(any(String.class))).thenThrow(StackNotExistsException.class);
+        Mockito.when(stackDao.getUserStack(any(String.class))).thenReturn(null);
         RequestBuilder request = MockMvcRequestBuilders.post("/user/stack/");
         mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("Stack created!!"));
+                .andExpect(jsonPath("$").value(Message.STACK_CREATED));
     }
 
     @Test
@@ -86,7 +87,7 @@ class UserStackControllerTest {
         RequestBuilder request = MockMvcRequestBuilders.post("/user/stack/");
         mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("Stack already exists!!"));
+                .andExpect(jsonPath("$").value(Message.STACK_ALREADY_EXISTS));
     }
 
     @Test

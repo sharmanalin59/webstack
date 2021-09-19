@@ -44,7 +44,7 @@
           return;
           }
             jQuery.ajax({
-                      url: 'http://localhost:8080/user/stack/push/'+$("#stack_push").val()+'/',
+                      url: 'http://127.0.0.1:8080/user/stack/push/'+$("#stack_push").val()+'/',
                       type: 'POST',
                         success: function(data, status, jqXHR) {
                             if(jqXHR.status == "200") {
@@ -69,7 +69,7 @@
           $('#pop').click(function() {
           console.log('Pop clicked...')
             jQuery.ajax({
-                      url: 'http://localhost:8080/user/stack/pop/',
+                      url: 'http://127.0.0.1:8080/user/stack/pop/',
                       type: 'DELETE',
                         success: function(data, status, jqXHR) {
                             if(jqXHR.status == "200") {
@@ -90,7 +90,7 @@
           console.log('Loading data...')
 
           jQuery.ajax({
-                      url: 'http://localhost:8080/user/stack/',
+                      url: 'http://127.0.0.1:8080/user/stack/',
                       type: 'GET',
                         success: function(data) {
                         $("#stack").html('<span>Stack - [ </span>');
@@ -111,7 +111,7 @@
 
           function createStack() {
           jQuery.ajax({
-                      url: 'http://localhost:8080/user/stack/',
+                      url: 'http://127.0.0.1:8080/user/stack/',
                       type: 'POST',
                         success: function(data, status, jqXHR) {
                             console.log(data);

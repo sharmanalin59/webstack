@@ -41,7 +41,7 @@ class StackDaoTest {
 
     @Test
     void getUserStack_When_user_stack_not_exists() {
-        assertEquals(null, stackJunitDao.getUserStack("abc"));
+        assertNull(stackJunitDao.getUserStack("abc"));
     }
 
     @Test
