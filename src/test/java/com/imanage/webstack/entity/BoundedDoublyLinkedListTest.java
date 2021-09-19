@@ -24,15 +24,6 @@ class BoundedDoublyLinkedListTest {
     }
 
     @Test
-    void addAtEnd_When_maxSize_zero_Throw_exception() {
-        Exception exception = assertThrows(
-                NonPositiveSizeException.class,
-                () -> new BoundedDoublyLinkedList<>(0));
-
-        assertEquals(ErrorMessage.NON_POSITIVE_SIZE, exception.getMessage());
-    }
-
-    @Test
     void addAtEnd() {
         BoundedDoublyLinkedList<Integer> dll = new BoundedDoublyLinkedList<>(3);
         dll.addAtEnd(1);
