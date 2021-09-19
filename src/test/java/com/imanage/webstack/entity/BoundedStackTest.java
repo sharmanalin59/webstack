@@ -22,15 +22,6 @@ class BoundedStackTest {
     }
 
     @Test
-    void push_When_maxSize_zero_Throw_exception() {
-        Exception exception = assertThrows(
-                NonPositiveSizeException.class,
-                () -> new BoundedDoublyLinkedList<>(0));
-
-        assertEquals(ErrorMessage.NON_POSITIVE_SIZE, exception.getMessage());
-    }
-
-    @Test
     void push() {
         BoundedStack<Integer> boundedStack= new BoundedDoublyLinkedList<>(3);
         boundedStack.push(1);
