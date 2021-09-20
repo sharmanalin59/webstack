@@ -16,10 +16,10 @@ public class ThreadSafeStack<T> implements Stack<T> {
 
     Logger logger = LoggerFactory.getLogger(ThreadSafeStack.class);
 
-    Stack<T> stack;
+    private Stack<T> stack;
 
-    final int size;
-    ReentrantLock lock = new ReentrantLock();
+    private final int size;
+    private ReentrantLock lock = new ReentrantLock();
 
     public ThreadSafeStack(int size) {
         if(size <= 0) {

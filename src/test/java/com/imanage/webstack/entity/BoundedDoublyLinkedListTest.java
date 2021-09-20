@@ -24,7 +24,7 @@ class BoundedDoublyLinkedListTest {
     }
 
     @Test
-    void addAtEnd() {
+    void addAtEnd_Verify_order() {
         BoundedDoublyLinkedList<Integer> dll = new BoundedDoublyLinkedList<>(3);
         dll.addAtEnd(1);
         dll.addAtEnd(2);
@@ -34,6 +34,9 @@ class BoundedDoublyLinkedListTest {
         assertArrayEquals(expectedArray, dll.getAll());
         assertEquals(2, dll.size());
         assertEquals(3, dll.maxSize());
+        assertEquals(2, dll.removeFromEnd());
+        assertEquals(1, dll.removeFromEnd());
+        assertEquals(0, dll.size());
     }
 
     @Test
@@ -86,19 +89,24 @@ class BoundedDoublyLinkedListTest {
         assertEquals(0, dll.size());
         assertEquals(3, dll.maxSize());
     }
+
     @Test
-    void removeAtEnd() {
+    void removeFromEnd_Verify_order() {
         BoundedDoublyLinkedList<Integer> dll = new BoundedDoublyLinkedList<>(3);
         dll.addAtEnd(1);
         dll.addAtEnd(2);
         dll.addAtEnd(3);
-        dll.removeFromEnd();
 
         Integer[] expectedArray = new Integer[2];
         expectedArray[0] = 1;
         expectedArray[1] = 2;
+        assertEquals(3, dll.removeFromEnd());
         assertArrayEquals(expectedArray, dll.getAll());
         assertEquals(2, dll.size());
+        assertEquals(3, dll.maxSize());
+        assertEquals(2, dll.removeFromEnd());
+        assertEquals(1, dll.removeFromEnd());
+        assertEquals(0, dll.size());
         assertEquals(3, dll.maxSize());
     }
 

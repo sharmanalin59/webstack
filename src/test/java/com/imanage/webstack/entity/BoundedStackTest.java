@@ -22,7 +22,7 @@ class BoundedStackTest {
     }
 
     @Test
-    void push() {
+    void push_Verify_lifo() {
         BoundedStack<Integer> boundedStack= new BoundedDoublyLinkedList<>(3);
         boundedStack.push(1);
         boundedStack.push(2);
@@ -31,6 +31,10 @@ class BoundedStackTest {
         expectedArray[1] = 2;
         assertArrayEquals(expectedArray, boundedStack.getAll());
         assertEquals(2, boundedStack.size());
+        assertEquals(3, boundedStack.maxSize());
+        assertEquals(2, boundedStack.pop());
+        assertEquals(1, boundedStack.pop());
+        assertEquals(0, boundedStack.size());
         assertEquals(3, boundedStack.maxSize());
     }
 
@@ -85,18 +89,22 @@ class BoundedStackTest {
         assertEquals(3, boundedStack.maxSize());
     }
     @Test
-    void pop() {
+    void pop_Verify_lifo() {
         BoundedStack<Integer> boundedStack= new BoundedDoublyLinkedList<>(3);
         boundedStack.push(1);
         boundedStack.push(2);
         boundedStack.push(3);
-        boundedStack.pop();
 
         Integer[] expectedArray = new Integer[2];
         expectedArray[0] = 1;
         expectedArray[1] = 2;
+        assertEquals(3, boundedStack.pop());
         assertArrayEquals(expectedArray, boundedStack.getAll());
         assertEquals(2, boundedStack.size());
+        assertEquals(3, boundedStack.maxSize());
+        assertEquals(2, boundedStack.pop());
+        assertEquals(1, boundedStack.pop());
+        assertEquals(0, boundedStack.size());
         assertEquals(3, boundedStack.maxSize());
     }
 
